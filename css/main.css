@@ -1,0 +1,47 @@
+body{
+	text-align: center;
+	min-width: 1000px;
+}
+h3{
+	margin: 0;
+}
+p{ margin-bottom: 4px; margin-top: 10px; }
+.wrap{
+	padding: 8px;
+	display: block;
+}
+.wrap-origin, .wrap-result{
+	width: 44%;
+	display: block;
+	margin: 6px;
+	float: left;
+	/*border: 2px solid black;*/
+}
+.wrap-operation{
+	width: 8%;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	height: 65vh;
+	display: block;
+	float: left;
+}
+button, input, select{
+	font-size: 18px;
+	line-height: 24px;
+	display: block;
+}
+button{
+	width: 100%;
+}
+input, select{
+	width: 94%;
+}
+.image-wrap{
+	border: 2px solid #ececec;
+	height: 70vh;
+}
+.input-inline{
+	width: 40%;
+	display: inline-block;
+}

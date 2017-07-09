@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>Ikat/ikkat art generator</title>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<script type="text/javascript" src="js/canvas-toBlob.js"></script>
+		<script type="text/javascript" src="js/FileSaver.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+ 	</head>
+ 	<body>
+ 		<h2>Ikat/ikkat art generator</h2>
+ 		<div class="wrap">
+ 			<div class="wrap-origin">
+ 				<h3>Origin</h3>
+ 				<div class="image-wrap">
+ 					<img id="originImg" onload="onImageLoad(this);">
+ 				</div>
+ 			</div>
+ 			<div class="wrap-operation">
+ 				<br/>
+ 				<input id="fileinput" type="file" onchange="onFileChange(event);" accept="image/*" style="display: none;">
+ 				<button onclick="onUploadClick();">Upload</button>
+ 				
+ 				<p>Unit</p>
+ 				<input id="unitNumber" type="number" min="1" value="2">
+ 				<select id="unit">
+ 					<option value="0">%</option>
+ 					<option value="1">px</option>
+ 				</select>
+
+ 				<p>Direction</p>
+ 				<select id="direction">
+ 					<option value="0">Vertical</option>
+ 					<option value="1">Horizontal</option>
+ 				</select>
+
+ 				<p>Scale Range(%)</p>
+ 				<div>
+ 					<input class="input-inline" type="number" id="scaleFrom" value="1" min="1" />
+ 					<input class="input-inline" type="number" id="scaleTo" value="6" min="1" />
+ 				</div>
+
+ 				<br/>
+ 				<button onclick="onGenerateClick();"> &gt;&gt; </button>
+
+ 				<br/><br/>
+ 				<button onclick="onGetResultClick();">Get File</button>
+ 			</div>
+ 			<div class="wrap-result">
+ 				<h3>Result</h3>
+ 				<div class="image-wrap">
+ 					<canvas id="resultCanvas"></canvas>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</body>
+ </html>
