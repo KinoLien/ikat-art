@@ -55,6 +55,7 @@ function onImageLoad(o){
 
 	// calculate ratio
 	onResizeHandler();
+	// onGenerateClick();
 }
 
 function onGenerateClick(){
@@ -69,8 +70,10 @@ function onGenerateClick(){
 	var h = currentHeight;
 	var pc = parseInt(document.getElementById('unitNumber').value);
 	var step = isPx? pc : Math.floor(isH? (w * pc / 100) : (h * pc / 100));
-	var scaleFromPc = parseInt(document.getElementById('scaleFrom').value) / 100;
-	var scaleToPc = parseInt(document.getElementById('scaleTo').value) / 100;
+	var scaleFrom = parseInt(document.getElementById('scaleFrom').value) / 100;
+	var scaleTo = parseInt(document.getElementById('scaleTo').value) / 100;
+	var scaleFromPc = (scaleFrom > scaleTo)? scaleTo : scaleFrom;
+	var scaleToPc = (scaleFrom > scaleTo)? scaleFrom : scaleTo;
 	var fixedSide = isH? h : w;
 	var scaleSide = isH? w : h;
 	var toScale = function(n){
@@ -90,6 +93,15 @@ function onGenerateClick(){
 		var dwh = isH? [scaled, step] : [step, scaled];
 		// ctx.drawImage(img, i, 0, step, h, i, 0, step, toScale(h));
 		ctx.drawImage.apply(ctx, [img].concat(sxy, swh, dxy, dwh));
+
+		// handle the opacity
+		var imageData = ctx.getImageData.apply(ctx, sxy.concat(swh));
+		var data = imageData.data;
+		for(var idx = 3, datalen = data.length; idx < datalen; idx += 4){
+			data[idx] *= (scaleSide / scaled) * parseFloat( ( Math.random() * 0.25 + 0.75 ).toFixed(2) );
+		}
+		// write back
+		ctx.putImageData.apply(ctx, [imageData].concat(sxy) );
 	}
 }
 
@@ -101,4 +113,17 @@ function onGetResultClick(){
 }
 
 window.addEventListener('resize', onResizeHandler);
+
+// window.addEventListener('load', function(){
+// 	['direction', 'unit']
+// 		.map(function(id){ return document.getElementById(id); })
+// 		.forEach(function(item){
+// 			item && item.addEventListener('change', onGenerateClick);
+// 		});
+// 	['unitNumber', 'scaleFrom', 'scaleTo']
+// 		.map(function(id){ return document.getElementById(id); })
+// 		.forEach(function(item){
+// 			item && item.addEventListener('input', onGenerateClick);
+// 		});
+// });
 
