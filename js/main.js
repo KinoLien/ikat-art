@@ -23,7 +23,7 @@ function onFileChange(e){
     }
 }
 
-function onUploadClick(){
+function onChooseClick(){
 	var f = document.getElementById('fileinput');
 	f && f.click();
 }
